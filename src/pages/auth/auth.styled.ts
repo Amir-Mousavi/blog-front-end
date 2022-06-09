@@ -8,7 +8,7 @@ export const s = {
         
         .form-auth {
             width: 300px;
-            height: 500px;
+            height: 400px;
             padding: 20px;
         }
     `
