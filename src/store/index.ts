@@ -1,19 +1,14 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { reducer, createUserAction } from "../pages/auth/redux";
+import { reducer } from "../pages/auth/redux";
+import { reducer as appReducer } from "./appRedux/appReduxSlice";
 
 export const store = configureStore({
   reducer: {
     auth: reducer,
+    app: appReducer,
   },
 });
 
 store.subscribe(() => {
   console.log({ state: store.getState() });
 });
-
-store.dispatch(
-  createUserAction({
-    email: "amir1@amir.com",
-    password: "testtest",
-  })
-);
