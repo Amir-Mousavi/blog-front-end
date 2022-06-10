@@ -2,7 +2,7 @@ import Stack from "@mui/material/Stack";
 // @ts-ignore
 import styled from "styled-components";
 
-export const s = {
+export const s: any = {
   AuthContainer: styled(Stack)`
     height: 100vh;
 
@@ -14,6 +14,10 @@ export const s = {
 
     .error-message {
       color: red;
+    }
+
+    .btn-signup {
+      margin-top: 80px;
     }
   `,
 };

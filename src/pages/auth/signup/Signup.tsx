@@ -1,21 +1,30 @@
 import Stack from "@mui/material/Stack";
 import Paper from "@mui/material/Paper";
 
-import { Formik, FormikValues } from "formik";
+import { Formik, FormikErrors, Form } from "formik";
 
 import { s } from "../auth.styled";
-import { TextField } from "@mui/material";
+import { TextField, Button } from "@mui/material";
+
+interface FormValue {
+  email: string;
+  password: string;
+  passwordConfirm: string;
+}
 
 export default function Signup() {
-  const initialValues = {
+  const initialValues: FormValue = {
     email: "",
     password: "",
     passwordConfirm: "",
   };
 
-  const onSubmit = () => {};
-  const validate = (values: FormikValues) => {
-    const errors: any = {};
+  const onSubmit = (values: FormValue) => {
+    console.log({ values });
+    return Promise.resolve();
+  };
+  const validate = (values: FormValue) => {
+    const errors: FormikErrors<FormValue> = {};
 
     if (
       values.email !== "" &&
@@ -44,42 +53,55 @@ export default function Signup() {
             validate={validate}
             onSubmit={onSubmit}
           >
-            {({ values, errors, handleSubmit, handleChange }) => (
-              <Stack spacing={3}>
-                <Stack>
-                  <TextField
-                    label="Email"
-                    name="email"
-                    value={values.email}
-                    onChange={handleChange}
-                  />
-                  {errors?.email && (
-                    <small className="error-message">{errors.email}</small>
-                  )}
-                </Stack>
-
-                <Stack spacing={2}>
-                  <TextField
-                    name="password"
-                    label="Password"
-                    type="password"
-                    value={values.password}
-                    onChange={handleChange}
-                  />
+            {({ values, errors, handleChange, isValid, isSubmitting }) => (
+              <Form>
+                <h2>Signup</h2>
+                <Stack spacing={3}>
                   <Stack>
                     <TextField
-                      name="passwordConfirm"
-                      type="password"
-                      label="Confirm password"
-                      value={values.passwordConfirm}
+                      label="Email"
+                      name="email"
+                      value={values.email}
                       onChange={handleChange}
                     />
-                    {errors.password && (
-                      <small className="error-message">{errors.password}</small>
+                    {errors?.email && (
+                      <small className="error-message">{errors.email}</small>
                     )}
                   </Stack>
+
+                  <Stack spacing={2}>
+                    <TextField
+                      name="password"
+                      label="Password"
+                      type="password"
+                      value={values.password}
+                      onChange={handleChange}
+                    />
+                    <Stack>
+                      <TextField
+                        name="passwordConfirm"
+                        type="password"
+                        label="Confirm password"
+                        value={values.passwordConfirm}
+                        onChange={handleChange}
+                      />
+                      {errors.password && (
+                        <small className="error-message">
+                          {errors.password}
+                        </small>
+                      )}
+                    </Stack>
+                  </Stack>
+                  <Button
+                    className="btn-signup"
+                    disabled={!isValid || isSubmitting}
+                    type="submit"
+                    variant="contained"
+                  >
+                    Signup
+                  </Button>
                 </Stack>
-              </Stack>
+              </Form>
             )}
           </Formik>
         </Paper>
