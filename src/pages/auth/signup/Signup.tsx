@@ -1,10 +1,12 @@
 import Stack from "@mui/material/Stack";
 import Paper from "@mui/material/Paper";
-
+import { TextField, Button } from "@mui/material";
 import { Formik, FormikErrors, Form } from "formik";
+import { useDispatch } from "react-redux";
+
+import { createUserAction } from "../redux";
 
 import { s } from "../auth.styled";
-import { TextField, Button } from "@mui/material";
 
 interface FormValue {
   email: string;
@@ -13,15 +15,17 @@ interface FormValue {
 }
 
 export default function Signup() {
+  const dispatch = useDispatch();
   const initialValues: FormValue = {
     email: "",
     password: "",
     passwordConfirm: "",
   };
 
-  const onSubmit = (values: FormValue) => {
-    console.log({ values });
-    return Promise.resolve();
+  const onSubmit = async (values: FormValue) => {
+    dispatch(
+      createUserAction({ email: values.email, password: values.password })
+    );
   };
   const validate = (values: FormValue) => {
     const errors: FormikErrors<FormValue> = {};
