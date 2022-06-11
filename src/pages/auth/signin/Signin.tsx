@@ -4,6 +4,9 @@ import Stack from "@mui/material/Stack";
 import Paper from "@mui/material/Paper";
 import { TextField, Button } from "@mui/material";
 import { Formik, FormikErrors, Form } from "formik";
+
+import { useNavigate } from "react-router-dom";
+
 import { s } from "../auth.styled";
 import { getFirebaseErrorMessageByCode, isEmailValid } from "../utils";
 
@@ -17,6 +20,8 @@ interface FormValues {
 
 export default function Signin() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const initialValues: FormValues = {
     email: "",
     password: "",
@@ -39,6 +44,7 @@ export default function Signin() {
       );
     } else {
       dispatch(actions.setSnackbarMessage("Sign in is done."));
+      navigate("/");
     }
   };
   const validate = (values: FormValues) => {
