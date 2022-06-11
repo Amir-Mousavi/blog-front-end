@@ -25,6 +25,10 @@ export default function Signup() {
   };
 
   const onSubmit = async (values: FormValue) => {
+    if (values.email === "" || values.password === "") {
+      return null;
+    }
+
     const result: any = await dispatch(
       createUserAction({ email: values.email, password: values.password })
     );
