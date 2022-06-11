@@ -5,6 +5,7 @@ import Paper from "@mui/material/Paper";
 import { TextField, Button } from "@mui/material";
 import { Formik, FormikErrors, Form } from "formik";
 import { s } from "../auth.styled";
+import { getFirebaseErrorMessageByCode, isEmailValid } from "../utils";
 
 import { signInAction } from "../redux";
 import { actions } from "../../../store/appRedux/appReduxSlice";
@@ -31,14 +32,23 @@ export default function Signin() {
 
     if (result.error) {
       // @ts-ignore
-      dispatch(actions.setSnackbarMessage(result.error.message));
+      dispatch(
+        actions.setSnackbarMessage(
+          // @ts-ignore
+          getFirebaseErrorMessageByCode(result.error.code)
+        )
+      );
     } else {
       // @ts-ignore
-      dispatch(actions.setSnackbarMessage("Signup is done."));
+      dispatch(actions.setSnackbarMessage("Sign in is done."));
     }
   };
   const validate = (values: FormValues) => {
     const errors: FormikErrors<FormValues> = {};
+
+    if (values.email !== "" && !isEmailValid(values.email)) {
+      errors.email = "The email address is not valid";
+    }
 
     return errors;
   };
@@ -64,17 +74,24 @@ export default function Signin() {
                         value={values.email}
                         onChange={handleChange}
                       />
-                      {errors.email && <small>{errors.email}</small>}
+                      {errors.email && (
+                        <small className="error-message">{errors.email}</small>
+                      )}
                     </Stack>
 
                     <Stack>
                       <TextField
                         name="password"
                         label="Password"
+                        type="password"
                         value={values.password}
                         onChange={handleChange}
                       />
-                      {errors.password && <small>{errors.password}</small>}
+                      {errors.password && (
+                        <small className="error-message">
+                          {errors.password}
+                        </small>
+                      )}
                     </Stack>
                   </Stack>
 

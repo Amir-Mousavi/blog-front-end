@@ -1,7 +1,7 @@
 import Stack from "@mui/material/Stack";
 import Paper from "@mui/material/Paper";
-import { TextField, Button } from "@mui/material";
-import { Formik, FormikErrors, Form } from "formik";
+import { Button, TextField } from "@mui/material";
+import { Form, Formik, FormikErrors } from "formik";
 import { useDispatch } from "react-redux";
 
 import { createUserAction } from "../redux";
@@ -9,6 +9,7 @@ import { createUserAction } from "../redux";
 import { s } from "../auth.styled";
 
 import { actions } from "../../../store/appRedux/appReduxSlice";
+import { isEmailValid } from "../utils";
 
 interface FormValue {
   email: string;
@@ -44,10 +45,7 @@ export default function Signup() {
   const validate = (values: FormValue) => {
     const errors: FormikErrors<FormValue> = {};
 
-    if (
-      values.email !== "" &&
-      !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)
-    ) {
+    if (values.email !== "" && !isEmailValid(values.email)) {
       errors.email = "The email address is not valid!";
     }
 
