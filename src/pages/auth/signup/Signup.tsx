@@ -35,10 +35,8 @@ export default function Signup() {
     );
 
     if (result.error) {
-      // @ts-ignore
       dispatch(actions.setSnackbarMessage(result.error.message));
     } else {
-      // @ts-ignore
       dispatch(actions.setSnackbarMessage("Signup is done."));
     }
   };

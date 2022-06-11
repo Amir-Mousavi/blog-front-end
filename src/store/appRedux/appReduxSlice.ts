@@ -1,6 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { setSnackbarMessage, removeSnackbarMessage } from "./appReduxActions";
 
+export interface AppState {
+  message: string | null;
+}
+
 const appReduxSlice = createSlice({
   name: "app",
   initialState: {

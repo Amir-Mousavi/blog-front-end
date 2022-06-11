@@ -34,12 +34,10 @@ export default function Signin() {
       // @ts-ignore
       dispatch(
         actions.setSnackbarMessage(
-          // @ts-ignore
           getFirebaseErrorMessageByCode(result.error.code)
         )
       );
     } else {
-      // @ts-ignore
       dispatch(actions.setSnackbarMessage("Sign in is done."));
     }
   };

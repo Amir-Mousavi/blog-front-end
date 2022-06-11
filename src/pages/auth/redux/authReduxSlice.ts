@@ -1,5 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { createUserAction, signInAction } from "./authActions";
+import firebase from "firebase/compat";
+
+interface AuthState {
+  user: firebase.auth.UserCredential | null;
+}
 
 const authReduxSlice = createSlice({
   name: "auth",
@@ -8,11 +13,11 @@ const authReduxSlice = createSlice({
   },
   reducers: {},
   extraReducers(builder) {
-    builder.addCase(createUserAction.fulfilled, (state: any, action) => {
+    builder.addCase(createUserAction.fulfilled, (state: AuthState, action) => {
       state.user = JSON.parse(action.payload);
     });
 
-    builder.addCase(signInAction.fulfilled, (state: any, action) => {
+    builder.addCase(signInAction.fulfilled, (state: AuthState, action) => {
       state.user = JSON.parse(action.payload);
     });
   },

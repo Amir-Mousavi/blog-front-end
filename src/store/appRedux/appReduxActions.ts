@@ -1,9 +1,14 @@
-import { AnyAction } from "@reduxjs/toolkit";
+import { PayloadAction } from "@reduxjs/toolkit";
 
-export function setSnackbarMessage(state: any, action: AnyAction) {
-  state.message = action.payload;
+import { AppState } from "./appReduxSlice";
+
+export function setSnackbarMessage(
+  state: AppState,
+  { payload }: PayloadAction<string | null>
+) {
+  state.message = payload;
 }
 
-export function removeSnackbarMessage(state: any) {
+export function removeSnackbarMessage(state: AppState) {
   state.message = null;
 }
