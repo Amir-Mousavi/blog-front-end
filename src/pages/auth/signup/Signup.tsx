@@ -8,6 +8,8 @@ import { createUserAction } from "../redux";
 
 import { s } from "../auth.styled";
 
+import { actions } from "../../../store/appRedux/appReduxSlice";
+
 interface FormValue {
   email: string;
   password: string;
@@ -23,9 +25,17 @@ export default function Signup() {
   };
 
   const onSubmit = async (values: FormValue) => {
-    dispatch(
+    const result: any = await dispatch(
       createUserAction({ email: values.email, password: values.password })
     );
+
+    if (result.error) {
+      // @ts-ignore
+      dispatch(actions.setSnackbarMessage(result.error.message));
+    } else {
+      // @ts-ignore
+      dispatch(actions.setSnackbarMessage("Signup is done."));
+    }
   };
   const validate = (values: FormValue) => {
     const errors: FormikErrors<FormValue> = {};
