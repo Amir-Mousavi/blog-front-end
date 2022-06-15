@@ -1,8 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { createUserAction, signInAction } from "./authActions";
+import { createUserAction, signInAction, updateUser } from "./authActions";
 import { User } from "firebase/auth";
 
-interface AuthState {
+export interface AuthState {
   user: User | null;
 }
 
@@ -11,7 +11,9 @@ const authReduxSlice = createSlice({
   initialState: {
     user: null,
   },
-  reducers: {},
+  reducers: {
+    updateUser,
+  },
   extraReducers(builder) {
     builder.addCase(createUserAction.fulfilled, (state: AuthState, action) => {
       state.user = JSON.parse(action.payload);
@@ -24,3 +26,4 @@ const authReduxSlice = createSlice({
 });
 
 export const reducer = authReduxSlice.reducer;
+export const { updateUser: updateUserAction } = authReduxSlice.actions;

@@ -1,5 +1,5 @@
-import { createAsyncThunk } from "@reduxjs/toolkit";
-
+import { createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
+import { AuthState } from "./authReduxSlice";
 import { createUser, signInUser } from "../../../firebase";
 
 export const createUserAction = createAsyncThunk(
@@ -18,3 +18,10 @@ export const signInAction = createAsyncThunk(
     return JSON.stringify(userCredential.user);
   }
 );
+
+export const updateUser = (
+  state: AuthState,
+  { payload }: PayloadAction<string>
+) => {
+  state.user = JSON.parse(payload);
+};

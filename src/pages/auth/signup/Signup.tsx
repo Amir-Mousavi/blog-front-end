@@ -3,6 +3,7 @@ import Paper from "@mui/material/Paper";
 import { Button, TextField } from "@mui/material";
 import { Form, Formik, FormikErrors } from "formik";
 import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 import { createUserAction } from "../redux";
 
@@ -19,6 +20,7 @@ interface FormValue {
 
 export default function Signup() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const initialValues: FormValue = {
     email: "",
     password: "",
@@ -37,6 +39,7 @@ export default function Signup() {
     if (result.error) {
       dispatch(actions.setSnackbarMessage(result.error.message));
     } else {
+      navigate("/");
       dispatch(actions.setSnackbarMessage("Signup is done."));
     }
   };
@@ -57,6 +60,10 @@ export default function Signup() {
 
     return errors;
   };
+
+  function goToSignIn() {
+    navigate("/signin");
+  }
 
   return (
     <s.AuthContainer justifyContent="center" alignItems="center">
@@ -106,6 +113,7 @@ export default function Signup() {
                       )}
                     </Stack>
                   </Stack>
+                  <Button onClick={goToSignIn}>Back to Signin</Button>
                   <Button
                     className="btn-signup"
                     disabled={!isValid || isSubmitting}

@@ -6,21 +6,24 @@ import Signin from "../pages/auth/signin";
 
 const Home = () => <div>Home</div>;
 
-export default function AppRoute() {
+export default function AppRoute({ children }: any) {
   return (
     <Router>
-      <Routes>
-        <Route
-          path="/"
-          element={
-            <PrivateRoute>
-              <Home />
-            </PrivateRoute>
-          }
-        />
-        <Route path="/signup" element={<Signup />} />
-        <Route path="/signin" element={<Signin />} />
-      </Routes>
+      <>
+        {children}
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <PrivateRoute>
+                <Home />
+              </PrivateRoute>
+            }
+          />
+          <Route path="/signup" element={<Signup />} />
+          <Route path="/signin" element={<Signin />} />
+        </Routes>
+      </>
     </Router>
   );
 }

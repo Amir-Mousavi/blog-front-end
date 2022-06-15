@@ -57,6 +57,10 @@ export default function Signin() {
     return errors;
   };
 
+  const goToSignup = () => {
+    navigate("/signup");
+  };
+
   return (
     <s.AuthContainer justifyContent="center" alignItems="center">
       <Stack>
@@ -99,8 +103,10 @@ export default function Signin() {
                     </Stack>
                   </Stack>
 
+                  <Button onClick={goToSignup}>Signup</Button>
+
                   <Button
-                    className="btn-signup"
+                    className="btn-signIn"
                     disabled={!isValid || isSubmitting}
                     type="submit"
                     variant="contained"

@@ -17,7 +17,10 @@ export const s: any = {
     }
 
     .btn-signup {
-      margin-top: 80px;
+    }
+
+    .btn-signIn {
+      margin-top: 120px;
     }
   `,
 };

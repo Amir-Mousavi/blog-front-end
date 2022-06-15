@@ -9,6 +9,7 @@ import AppRoute from "./routes";
 import { store, persistor } from "./store";
 
 import BlogSnackbar from "./components/Snackbar";
+import FirebaseUserChecker from "./FirebaseUserChecker";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
@@ -18,7 +19,9 @@ root.render(
     <Provider store={store}>
       <PersistGate persistor={persistor} loading={null}>
         <>
-          <AppRoute />
+          <AppRoute>
+            <FirebaseUserChecker />
+          </AppRoute>
           <BlogSnackbar />
         </>
       </PersistGate>

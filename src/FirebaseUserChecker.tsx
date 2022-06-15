@@ -1,15 +1,19 @@
 import { useEffect } from "react";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { getAuth, onAuthStateChanged, User } from "firebase/auth";
 
-export default function () {
+import { updateUserAction } from "./pages/auth/redux/authReduxSlice";
+
+export default function FirebaseUserChecker() {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const auth = getAuth();
     onAuthStateChanged(auth, (user: User | null) => {
       if (user) {
-        // replace redux user object
+        dispatch(updateUserAction(JSON.stringify(user)));
       } else {
         // Go to login page
         navigate("/signin");
