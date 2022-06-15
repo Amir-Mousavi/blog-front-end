@@ -19,7 +19,7 @@ export default function FirebaseUserChecker() {
         navigate("/signin");
       }
     });
-  }, [navigate]);
+  }, [navigate, dispatch]);
 
   return null;
 }
