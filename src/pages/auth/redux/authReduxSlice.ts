@@ -1,9 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { createUserAction, signInAction } from "./authActions";
-import firebase from "firebase/compat";
+import { User } from "firebase/auth";
 
 interface AuthState {
-  user: firebase.auth.UserCredential | null;
+  user: User | null;
 }
 
 const authReduxSlice = createSlice({

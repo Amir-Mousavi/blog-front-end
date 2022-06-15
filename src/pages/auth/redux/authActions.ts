@@ -6,7 +6,7 @@ export const createUserAction = createAsyncThunk(
   "users/create",
   async ({ email, password }: { email: string; password: string }) => {
     const userCredential = await createUser(email, password);
-    return JSON.stringify(userCredential);
+    return JSON.stringify(userCredential.user);
   }
 );
 
@@ -15,6 +15,6 @@ export const signInAction = createAsyncThunk(
   async ({ email, password }: { email: string; password: string }) => {
     const userCredential = await signInUser(email, password);
 
-    return JSON.stringify(userCredential);
+    return JSON.stringify(userCredential.user);
   }
 );
