@@ -3,8 +3,7 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import PrivateRoute from "./PrivateRoute";
 import Signup from "../pages/auth/signup";
 import Signin from "../pages/auth/signin";
-
-const Home = () => <div>Home</div>;
+import Home from "../pages/Home";
 
 export default function AppRoute({ children }: any) {
   return (

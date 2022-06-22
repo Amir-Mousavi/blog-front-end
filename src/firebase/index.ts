@@ -11,4 +11,4 @@ const firebaseConfig = {
 
 export const app = initializeApp(firebaseConfig);
 
-export { createUser, signInUser } from "./firebaseApi";
+export { createUser, signInUser, logout } from "./firebaseApi";

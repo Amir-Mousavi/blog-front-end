@@ -12,6 +12,13 @@ export default function FirebaseUserChecker() {
   useEffect(() => {
     const auth = getAuth();
     onAuthStateChanged(auth, (user: User | null) => {
+      if (
+        window.location.pathname.includes("signin") ||
+        window.location.pathname.includes("signup")
+      ) {
+        return;
+      }
+
       if (user) {
         dispatch(updateUserAction(JSON.stringify(user)));
       } else {
