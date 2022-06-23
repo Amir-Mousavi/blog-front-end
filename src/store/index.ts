@@ -13,6 +13,7 @@ import { combineReducers } from "@reduxjs/toolkit";
 import storage from "redux-persist/lib/storage";
 import { reducer } from "../pages/auth/redux";
 import { reducer as appReducer } from "./appRedux/appReduxSlice";
+import { reducer as categoryReducer } from "../components/CategoryList/redux/categoryReduxSlice";
 
 import FirebaseToken from "../FirebaseToken";
 
@@ -25,6 +26,7 @@ const persistConfig = {
 const rootReducer = combineReducers({
   auth: reducer,
   app: appReducer,
+  category: categoryReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
