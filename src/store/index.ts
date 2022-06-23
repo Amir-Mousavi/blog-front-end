@@ -14,6 +14,8 @@ import storage from "redux-persist/lib/storage";
 import { reducer } from "../pages/auth/redux";
 import { reducer as appReducer } from "./appRedux/appReduxSlice";
 
+import FirebaseToken from "../FirebaseToken";
+
 const persistConfig = {
   key: "root",
   version: 1,
@@ -40,5 +42,11 @@ export const store = configureStore({
 export const persistor = persistStore(store);
 
 store.subscribe(() => {
-  console.log({ state: store.getState() });
+  const user: any = store.getState().auth.user;
+
+  if (user) {
+    FirebaseToken.token = user?.stsTokenManager.accessToken;
+  } else {
+    FirebaseToken.token = null;
+  }
 });
