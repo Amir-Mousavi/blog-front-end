@@ -1,5 +1,5 @@
 class FirebaseToken {
-  token: String | null = null;
+  token: string | null = null;
 }
 
 const firebaseToken = new FirebaseToken();
